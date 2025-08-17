@@ -1,10 +1,8 @@
-import Providers from "@/components/providers/provider";
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
 import "./globals.css";
-import { SiteHeader } from "./site-header";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -13,7 +11,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: [],
+  keywords: ["Community", "LinkedIn"],
   authors: [
     {
       name: "SinghAstra",
@@ -40,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: ["/assets/hero.png"],
+    images: ["/assets/landing.png"],
     creator: "@singhastra",
   },
   icons: {
@@ -54,28 +52,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased min-h-screen bg-background">
-        <Providers>
-          <NextTopLoader color="hsl(var(--primary))" showSpinner={false} />
-          <SiteHeader />
-          {children}
-          <Toaster
-            theme="dark"
-            toastOptions={{
-              style: {
-                fontFamily: "Space Grotesk, monospace",
-                background: "hsl(var(--muted) / 0.2)",
-                color: "hsl(var(--foreground))",
-                border: "1px solid hsl(var(--border))",
-                letterSpacing: "0.01em",
-                fontSize: ".95rem",
-                backdropFilter: "blur(20px)",
-                WebkitBackdropFilter: "blur(20px)",
-              },
-            }}
-          />
-        </Providers>
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased min-h-screen bg-background ">
+        <NextTopLoader color="hsl(var(--primary))" showSpinner={false} />
+        {children}
+        <Toaster
+          theme="dark"
+          toastOptions={{
+            style: {
+              fontFamily: "Space Grotesk, monospace",
+              background: "hsl(var(--muted) / 0.2)",
+              backdropFilter: "blur(20px)",
+              color: "hsl(var(--foreground))",
+              border: "1px solid hsl(var(--border))",
+              letterSpacing: "0.05em",
+              fontSize: ".95rem",
+              borderRadius: "var(--radius)",
+            },
+          }}
+        />
       </body>
     </html>
   );

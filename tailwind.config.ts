@@ -1,17 +1,19 @@
-import tailwindCSSTypography from "@tailwindcss/typography";
-import type { Config } from "tailwindcss";
-import tailwindCSSAnimate from "tailwindcss-animate";
+import tailwindAnimate from "tailwindcss-animate";
 
-const config: Config = {
+module.exports = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -54,26 +56,29 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
       keyframes: {
-        shine: {
+        "accordion-down": {
           from: {
-            backgroundPosition: "0 0",
+            height: "0",
           },
           to: {
-            backgroundPosition: "-400% 0",
+            height: "var(--radix-accordion-content-height)",
+          },
+        },
+        "accordion-up": {
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
           },
         },
       },
       animation: {
-        shine: "shine 6s linear infinite",
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [tailwindCSSAnimate, tailwindCSSTypography],
+  plugins: [tailwindAnimate],
 };
-export default config;
