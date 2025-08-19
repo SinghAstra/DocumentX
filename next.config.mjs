@@ -1,8 +1,11 @@
-/** @type {import('next').NextConfig} */
+import createMDX from "@next/mdx";
+
 const nextConfig = {
-  images: {
-    domains: ["lxk1jkmenjpus5d8.public.blob.vercel-storage.com"],
-  },
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };
 
-export default nextConfig;
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+});
+
+export default withMDX(nextConfig);

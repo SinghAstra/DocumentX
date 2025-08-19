@@ -1,5 +1,5 @@
+import tailwindTypography from "@tailwindcss/typography";
 import tailwindAnimate from "tailwindcss-animate";
-
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -80,5 +80,5 @@ module.exports = {
       },
     },
   },
-  plugins: [tailwindAnimate],
+  plugins: [tailwindAnimate, tailwindTypography],
 };
