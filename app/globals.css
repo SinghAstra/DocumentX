@@ -108,3 +108,8 @@ body {
 .moving-glow {
   animation: moving-glow 4s linear infinite;
 }
+
+pre > code {
+  padding: 0 !important;
+  border: 0 !important;
+}
