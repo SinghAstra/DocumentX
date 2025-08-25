@@ -1,8 +1,8 @@
 "use client";
 
 import MovingBackground from "@/components/component-x/moving-background";
-import MovingBorder from "@/components/component-x/moving-border";
 import { Button } from "@/components/ui/button";
+import MovingBorder from "@/components/ui/moving-border";
 import { siteConfig } from "@/config/site";
 import {
   blurInVariant,

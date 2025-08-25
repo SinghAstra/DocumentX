@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Check, Copy } from "lucide-react";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {
   children: React.ReactNode;
@@ -14,22 +14,11 @@ export const CodeBlock = ({
   ...props
 }: CodeBlockProps) => {
   const [copied, setCopied] = useState(false);
-
-  const extractTextFromChildren = (node: React.ReactNode): string => {
-    if (typeof node === "string") return node;
-    if (typeof node === "number") return String(node);
-    if (Array.isArray(node)) return node.map(extractTextFromChildren).join("");
-    if (React.isValidElement(node)) {
-      const props = node.props as { children?: React.ReactNode };
-      if (props.children) {
-        return extractTextFromChildren(props.children);
-      }
-    }
-    return "";
-  };
+  const codeRef = useRef<HTMLPreElement>(null);
 
   const copyToClipboard = async () => {
-    const text = extractTextFromChildren(children);
+    const text = codeRef.current?.textContent || "";
+
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
@@ -46,6 +35,7 @@ export const CodeBlock = ({
   return (
     <div className="relative">
       <pre
+        ref={codeRef}
         className={cn(
           "my-4 overflow-x-auto rounded border bg-muted/30 p-4 pr-12",
           className
